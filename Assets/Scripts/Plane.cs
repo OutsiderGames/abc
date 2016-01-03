@@ -14,11 +14,9 @@ public class Plane : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D other) {
-		if (other.CompareTag("Ball")) {
-			if (other.attachedRigidbody) {
-				other.attachedRigidbody.AddForce(new Vector2(-100, -100));
-				Debug.Log (other.attachedRigidbody.velocity);
-			}
+		if (other.CompareTag("Ball") && 
+		    other.attachedRigidbody) {
+			other.attachedRigidbody.AddForce(new Vector2(0, 0));
 		}
 	}
 }

@@ -9,9 +9,7 @@ public class Ball : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		rb.drag = 0.05f;
-		rb.velocity = new Vector3(10, 0, 0);
 		rb.angularVelocity = 0.2f;
-
 		cc = GetComponents<CircleCollider2D>()[0];
 	}
 	
