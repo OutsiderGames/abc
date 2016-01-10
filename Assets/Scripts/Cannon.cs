@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Cannon : MonoBehaviour {
-	public GameObject ballPrefab;
 	private AbcConfig config;
 	private int bullet;
 	private int ballBucketSize;
