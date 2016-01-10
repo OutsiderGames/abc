@@ -8,8 +8,8 @@ public class Ball : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-		rb.drag = 0.05f;
-		rb.angularVelocity = 0.2f;
+		rb.drag = 0.0001f;
+		rb.angularVelocity = 0.1f;
 		cc = GetComponents<CircleCollider2D>()[0];
 	}
 	
