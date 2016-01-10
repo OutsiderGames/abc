@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Menu : MonoBehaviour {
-	public static string scene;
+	public volatile static string scene;
 
 	// Use this for initialization
 	void Start () {

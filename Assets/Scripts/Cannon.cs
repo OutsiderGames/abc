@@ -8,6 +8,9 @@ public class Cannon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (Menu.scene == null) {
+			Menu.scene = "Scene1";
+		}
 		AbcConfig config = GameObject.Find (Menu.scene).GetComponent<AbcConfig>();
 		bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
@@ -21,7 +24,7 @@ public class Cannon : MonoBehaviour {
 	}
 
 	void ThrowBall() {
-		int ballNumber = (int) Random.Range(1, ballBucketSize);
+		int ballNumber = (int) Random.Range(1, ballBucketSize + 1);
 		GameObject ball = Instantiate(Resources.Load("Balls/ball_" + ballNumber ,typeof(GameObject))) as GameObject;
 		ball.name = "ball" + bullet--;
 		Vector3 position = this.transform.position;
