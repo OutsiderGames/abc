@@ -2,11 +2,16 @@
 using System.Collections;
 
 public class Cannon : MonoBehaviour {
-	public int bullet;
-	public int ballBucketSize;
+	public GameObject ballPrefab;
+	private AbcConfig config;
+	private int bullet;
+	private int ballBucketSize;
 
 	// Use this for initialization
 	void Start () {
+		AbcConfig config = GameObject.Find (Menu.scene).GetComponent<AbcConfig>();
+		bullet = config.bullet;
+		ballBucketSize = config.ballBucketSize;
 	}
 	
 	// Update is called once per frame
