@@ -28,7 +28,7 @@ public class Cannon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (Menu.getStage ()));
+		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (StageMenu.getStage ()));
 		bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
 		speed = 0.3f;
@@ -39,8 +39,9 @@ public class Cannon : MonoBehaviour {
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		audioSource = GetComponent<AudioSource> ();
 
-		velocity = 10;
-		mass = 100;
+		CannonConfig cannon = (CannonConfig)Activator.CreateInstance(Type.GetType (CannonMenu.getCannon ()));
+		velocity = cannon.velocity;
+		mass = cannon.mass;
 	}
 	
 	// Update is called once per frame

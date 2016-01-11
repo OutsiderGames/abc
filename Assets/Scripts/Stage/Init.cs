@@ -9,7 +9,7 @@ public class Init : MonoBehaviour {
 	private BallConfig[] configs;
 
 	void Start() {
-		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (Menu.getStage ()));
+		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (StageMenu.getStage ()));
 		bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
 		configs = config.configs;

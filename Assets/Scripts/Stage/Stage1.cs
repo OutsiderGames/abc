@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Scene1 : AbcConfig {
-	public Scene1() {
+public class Stage1 : AbcConfig {
+	public Stage1() {
 		bullet = 15;
 		ballBucketSize = 3;
 		configs = new BallConfig[]{new BallConfig(3, 0, 0, -10, 7), new BallConfig(6, 0, 0, 10, 7)};

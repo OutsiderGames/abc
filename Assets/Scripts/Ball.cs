@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -53,12 +54,17 @@ public class Ball : MonoBehaviour {
 			connected.Add (other.gameObject);
 		}
 		if (other.name == "Exit") {
-			if (rb.velocity.x > 5.0f &&
+			if (Math.Abs(rb.velocity.x) > 5.0f &&
 				disturb == false) {
 				cc.enabled = false;
 			} else {
 				disturb = true;
 			}
+		}
+		if (other.CompareTag ("Wall") &&
+			Math.Abs(rb.velocity.x) > 20.0f &&
+			disturb == true) {
+			gameObject.SetActive (false);
 		}
 	}
 }
