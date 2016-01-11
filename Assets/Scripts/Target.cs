@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class Target : MonoBehaviour {
 	public Text scoreText;
 	public Text clearText;
 
+	private int maxHp;
 	private int hp;
 	private bool alive;
 	private float minX;
@@ -15,14 +17,18 @@ public class Target : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		hp = 100;
+		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (Menu.getStage ()));
+		hp = config.hp;
+		maxHp = config.hp;
 		alive = true;
+		Debug.Log (config.speed);
 		Hashtable hash = new Hashtable ();
 		hash ["looptype"] = iTween.LoopType.loop;
 		hash ["easetype"] = iTween.EaseType.linear;
-		hash ["time"] = 2.0f;
-		hash ["path"] = new Vector3[]{new Vector3(11, 5, 0), new Vector3(11, -5, 0)};
+		hash ["speed"] = config.speed;
+		hash ["path"] = config.path;
 		iTween.MoveTo (this.gameObject, hash);
+		scoreText.text = "Boss HP : " + hp * 100 / maxHp  + "%";
 	}
 	
 	// Update is called once per frame
@@ -35,9 +41,11 @@ public class Target : MonoBehaviour {
 			hp -= 10;
 			if (hp == 0) {
 				alive = false;
-				clearText.text = "Clear";
+				scoreText.text = "Clear";
+			} else {
+				scoreText.text = "Boss HP : " + hp * 100 / maxHp  + "%";
 			}
-			scoreText.text = "Boss HP : " + hp;
 		}
+		other.gameObject.SetActive (false);
 	}
 }

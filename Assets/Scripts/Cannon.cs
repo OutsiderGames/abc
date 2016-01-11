@@ -95,6 +95,7 @@ public class Cannon : MonoBehaviour {
 		GameObject ball = Instantiate(Resources.Load("Balls/ball_" + ballNumber ,typeof(GameObject))) as GameObject;
 		ball.name = "ball" + bullet--;
 		ball.GetComponent<Ball> ().color = ballNumber;
+		ball.GetComponent<Ball> ().disturb = false;
 		Debug.Log (ball.GetComponent<Ball> ().color);
 		Vector3 position = this.transform.position;
 		ball.transform.position = new Vector3(position.x + 1.5f, position.y, position.z);

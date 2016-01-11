@@ -21,6 +21,7 @@ public class Menu : MonoBehaviour {
 		if (scene == null) {
 			scene = "Scene1";
 		}
+		Debug.Log (scene);
 		return scene;
 	}
 }

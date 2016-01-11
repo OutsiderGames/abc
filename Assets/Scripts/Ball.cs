@@ -4,13 +4,14 @@ using System.Collections;
 public class Ball : MonoBehaviour {
 	private Rigidbody2D rb;
 	private CircleCollider2D cc;
+	public bool disturb;
 	public int color;
 	
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		rb.drag = 0.0f;
-		rb.angularVelocity = 0.1f;
+		rb.angularVelocity = 0.0f;
 		cc = GetComponents<CircleCollider2D>()[0];
 	}
 	
@@ -31,9 +32,13 @@ public class Ball : MonoBehaviour {
 		}
 	}
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.name == "Exit" &&
-		    rb.velocity.x > 5.0f) {
-			cc.enabled = false;
+		if (other.name == "Exit") {
+			if (rb.velocity.x > 5.0f &&
+				disturb == false) {
+				cc.enabled = false;
+			} else {
+				disturb = true;
+			}
 		}
 	}
 }
