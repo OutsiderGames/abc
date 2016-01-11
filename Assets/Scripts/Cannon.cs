@@ -13,6 +13,8 @@ public class Cannon : MonoBehaviour {
 	private float moveThresholdX;
 	private float scaleY;
 
+	private Animator ani;
+
 	// Use this for initialization
 	void Start () {
 		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (Menu.getStage ()));
@@ -21,12 +23,15 @@ public class Cannon : MonoBehaviour {
 		speed = 0.3f;
 		moveThresholdX = Screen.width * 0.3f;
 		scaleY = Screen.height / 20.0f;
+
+		ani = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (isFire() &&
 			bullet > 0) {
+			ani.SetBool ("shoting", true);
 			ThrowBall ();
 		}
 		Vector2? movePosition = getMovePosition ();
