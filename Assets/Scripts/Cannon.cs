@@ -16,6 +16,9 @@ public class Cannon : MonoBehaviour {
 	private int mass;
 
 	private Animator ani;
+	private SpriteRenderer spriteRenderer;
+
+	private bool fireThrowBall = false;
 
 	// Use this for initialization
 	void Start () {
@@ -25,18 +28,30 @@ public class Cannon : MonoBehaviour {
 		speed = 0.3f;
 		moveThresholdX = Screen.width * 0.3f;
 		scaleY = Screen.height / 20.0f;
+
 		ani = GetComponent<Animator> ();
+		spriteRenderer = GetComponent<SpriteRenderer> ();
+
 		velocity = 10;
 		mass = 100;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (isFire() &&
-			bullet > 0) {
+		// start play shot animation
+		if (isFire () && bullet > 0) {
 			ani.SetBool ("shoting", true);
-			ThrowBall ();
+			fireThrowBall = true;
+		} else if (isFire ()) {
+			ani.SetBool ("shot_fail", true);
 		}
+
+		// shot_4 is exactly shot image
+		if (fireThrowBall && spriteRenderer.sprite.name == "shot_4") {
+			ThrowBall ();
+			fireThrowBall = false;
+		}
+			
 		Vector2? movePosition = getMovePosition ();
 		if (movePosition.HasValue) {
 			moveTo (movePosition.Value);
@@ -106,7 +121,7 @@ public class Cannon : MonoBehaviour {
 		ball.GetComponent<Ball> ().disturb = false;
 		Vector3 position = this.transform.position;
 
-		ball.transform.position = new Vector3(position.x + 1.5f, position.y + 0.2f, position.z);
+		ball.transform.position = new Vector3(position.x + 1.6f, position.y + 0.4f, 0);
 		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(velocity, 0, 0);
 		ball.GetComponent<Rigidbody2D> ().mass = mass;
 
