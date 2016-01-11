@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Cannon : MonoBehaviour {
@@ -14,10 +15,7 @@ public class Cannon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (Menu.scene == null) {
-			Menu.scene = "Scene1";
-		}
-		AbcConfig config = GameObject.Find (Menu.scene).GetComponent<AbcConfig>();
+		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (Menu.getStage ()));
 		bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
 		speed = 0.3f;
@@ -93,9 +91,11 @@ public class Cannon : MonoBehaviour {
 	}
 
 	void ThrowBall() {
-		int ballNumber = (int) Random.Range(1, ballBucketSize + 1);
+		int ballNumber = (int) UnityEngine.Random.Range(1, ballBucketSize + 1);
 		GameObject ball = Instantiate(Resources.Load("Balls/ball_" + ballNumber ,typeof(GameObject))) as GameObject;
 		ball.name = "ball" + bullet--;
+		ball.GetComponent<Ball> ().color = ballNumber;
+		Debug.Log (ball.GetComponent<Ball> ().color);
 		Vector3 position = this.transform.position;
 		ball.transform.position = new Vector3(position.x + 1.5f, position.y, position.z);
 		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(10, 0, 0);

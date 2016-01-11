@@ -2,11 +2,9 @@
 using System.Collections;
 
 
-public abstract class AbcConfig : MonoBehaviour {
+public class AbcConfig {
 	public int bullet;
 	public int ballBucketSize;
-
-	public void initialize() {
-	}
+	public BallConfig[] configs;
 }
 

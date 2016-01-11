@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Menu : MonoBehaviour {
-	public volatile static string scene;
+	private volatile static string scene;
 
 	// Use this for initialization
 	void Start () {
@@ -15,5 +15,12 @@ public class Menu : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 			Application.LoadLevel ("game"); 
 		}
+	}
+
+	public static string getStage() {
+		if (scene == null) {
+			scene = "Scene1";
+		}
+		return scene;
 	}
 }

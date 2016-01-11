@@ -18,10 +18,10 @@ public class Target : MonoBehaviour {
 		hp = 100;
 		alive = true;
 		Hashtable hash = new Hashtable ();
-		hash ["looptype"] = iTween.LoopType.pingPong;
+		hash ["looptype"] = iTween.LoopType.loop;
 		hash ["easetype"] = iTween.EaseType.linear;
 		hash ["time"] = 2.0f;
-		hash ["path"] = new Vector3[]{new Vector3(11, -5, 0), new Vector3(11, 5, 0)};
+		hash ["path"] = new Vector3[]{new Vector3(11, 5, 0), new Vector3(11, -5, 0)};
 		iTween.MoveTo (this.gameObject, hash);
 	}
 	

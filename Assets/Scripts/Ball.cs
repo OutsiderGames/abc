@@ -4,6 +4,7 @@ using System.Collections;
 public class Ball : MonoBehaviour {
 	private Rigidbody2D rb;
 	private CircleCollider2D cc;
+	public int color;
 	
 	// Use this for initialization
 	void Start () {

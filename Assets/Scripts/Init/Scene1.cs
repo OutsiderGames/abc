@@ -2,21 +2,9 @@
 using System.Collections;
 
 public class Scene1 : AbcConfig {
-	// Use this for initialization
-	void Start () {
-		BallConfig[] configs = new BallConfig[]{new BallConfig(3, 0, 0, -10), new BallConfig(6, 0, 0, 10)};
-		foreach(BallConfig config in configs) {
-			int ballNumber = (int) Random.Range(1, ballBucketSize + 1);
-			Debug.Log ("ball number : " + ballNumber);
-			GameObject ball = Instantiate(Resources.Load("Balls/ball_" + ballNumber ,typeof(GameObject))) as GameObject;
-			ball.transform.position = config.position;
-			ball.GetComponent<Rigidbody2D>().velocity = config.velocity;
-			ball.GetComponents<CircleCollider2D>()[0].enabled = true;
-		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public Scene1() {
+		bullet = 15;
+		ballBucketSize = 3;
+		configs = new BallConfig[]{new BallConfig(3, 0, 0, -10), new BallConfig(6, 0, 0, 10)};
 	}
 }
