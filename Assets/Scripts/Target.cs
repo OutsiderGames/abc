@@ -5,7 +5,6 @@ using System.Collections;
 
 public class Target : MonoBehaviour {
 	public Text scoreText;
-	public Text clearText;
 
 	private int maxHp;
 	private int hp;
