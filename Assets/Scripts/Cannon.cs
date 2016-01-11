@@ -2,9 +2,13 @@
 using System.Collections;
 
 public class Cannon : MonoBehaviour {
+	[SerializeField]
+	private Camera camera;
+
 	private AbcConfig config;
 	private int bullet;
 	private int ballBucketSize;
+	private float speed;
 	private float moveThresholdX;
 	private float scaleY;
 
@@ -16,9 +20,9 @@ public class Cannon : MonoBehaviour {
 		AbcConfig config = GameObject.Find (Menu.scene).GetComponent<AbcConfig>();
 		bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
+		speed = 0.3f;
 		moveThresholdX = Screen.width * 0.3f;
 		scaleY = Screen.height / 20.0f;
-		Debug.Log (Screen.height);
 	}
 	
 	// Update is called once per frame
@@ -73,16 +77,17 @@ public class Cannon : MonoBehaviour {
 	}
 
 	void moveTo(Vector2 position) {
+		
 		float start = this.transform.position.y;
 		float end = position.y / scaleY - 10;
 		float y = this.transform.position.y;
-		Debug.Log (y);
-		Debug.Log (position);
+		Debug.Log (camera.ScreenToWorldPoint(position));
+		Debug.Log (this.transform.position);
 		if (start > end) {
-			y = start - 1.0f > end ? start - 1.0f : end;
+			y = start - speed > end ? start - speed : end;
 		}
 		if (start < end) {
-			y = start + 1.0f < end ? start + 1.0f : end;
+			y = start + speed < end ? start + speed : end;
 		}
 		this.transform.position = new Vector2(this.transform.position.x, y);
 	}
@@ -92,7 +97,7 @@ public class Cannon : MonoBehaviour {
 		GameObject ball = Instantiate(Resources.Load("Balls/ball_" + ballNumber ,typeof(GameObject))) as GameObject;
 		ball.name = "ball" + bullet--;
 		Vector3 position = this.transform.position;
-		ball.transform.position = position;
+		ball.transform.position = new Vector3(position.x + 1.5f, position.y, position.z);
 		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(10, 0, 0);
 	}
 }
