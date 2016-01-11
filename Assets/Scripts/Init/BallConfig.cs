@@ -13,10 +13,12 @@ using UnityEngine;
 public class BallConfig {
 	public Vector3 position;
 	public Vector3 velocity;
+	public int color;
 
-	public BallConfig(int xPos, int yPos, int xVel, int yVel) {
-		position = new Vector3(xPos, yPos, 0);
-		velocity = new Vector3(xVel, yVel, 0);
+	public BallConfig(int xPos, int yPos, int xVel, int yVel, int color) {
+		this.position = new Vector3(xPos, yPos, 0);
+		this.velocity = new Vector3(xVel, yVel, 0);
+		this.color = color;
 	}
 }
 

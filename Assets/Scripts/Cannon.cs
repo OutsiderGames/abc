@@ -101,7 +101,6 @@ public class Cannon : MonoBehaviour {
 		ball.name = "ball" + bullet--;
 		ball.GetComponent<Ball> ().color = ballNumber;
 		ball.GetComponent<Ball> ().disturb = false;
-		Debug.Log (ball.GetComponent<Ball> ().color);
 		Vector3 position = this.transform.position;
 		ball.transform.position = new Vector3(position.x + 1.5f, position.y, position.z);
 		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(10, 0, 0);

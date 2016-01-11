@@ -20,7 +20,6 @@ public class Target : MonoBehaviour {
 		hp = config.hp;
 		maxHp = config.hp;
 		alive = true;
-		Debug.Log (config.speed);
 		Hashtable hash = new Hashtable ();
 		hash ["looptype"] = iTween.LoopType.loop;
 		hash ["easetype"] = iTween.EaseType.linear;
@@ -41,6 +40,7 @@ public class Target : MonoBehaviour {
 			if (hp == 0) {
 				alive = false;
 				scoreText.text = "Clear";
+				Application.LoadLevel ("result"); 
 			} else {
 				scoreText.text = "Boss HP : " + hp * 100 / maxHp  + "%";
 			}

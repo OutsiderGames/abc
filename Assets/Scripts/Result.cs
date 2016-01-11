@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
-public class Menu : MonoBehaviour {
-	private volatile static string scene;
+public class Result : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		scene = GetComponent<Text> ().text;
+	
 	}
 	
 	// Update is called once per frame
@@ -15,12 +13,5 @@ public class Menu : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 			Application.LoadLevel ("game"); 
 		}
-	}
-
-	public static string getStage() {
-		if (scene == null) {
-			scene = "Stage2";
-		}
-		return scene;
 	}
 }
