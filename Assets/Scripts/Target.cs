@@ -16,7 +16,7 @@ public class Target : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (Menu.getStage ()));
+		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (StageMenu.getStage ()));
 		hp = config.hp;
 		maxHp = config.hp;
 		alive = true;
