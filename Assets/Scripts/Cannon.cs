@@ -5,6 +5,8 @@ using System.Collections;
 public class Cannon : MonoBehaviour {
 	[SerializeField]
 	private Camera camera;
+	[SerializeField]
+	private AudioClip throwSound;
 
 	private AbcConfig config;
 	private int bullet;
@@ -15,8 +17,12 @@ public class Cannon : MonoBehaviour {
 	private int velocity;
 	private int mass;
 
-	private Animator ani;
+	private Animator throwAnimator;
 	private SpriteRenderer spriteRenderer;
+
+	private AudioSource audioSource;
+	private float throwSoundVolLowRange = .5f;
+	private float throwSoundVolHighRange = 1f;
 
 	private bool fireThrowBall = false;
 
@@ -29,8 +35,9 @@ public class Cannon : MonoBehaviour {
 		moveThresholdX = Screen.width * 0.3f;
 		scaleY = Screen.height / 20.0f;
 
-		ani = GetComponent<Animator> ();
+		throwAnimator = GetComponent<Animator> ();
 		spriteRenderer = GetComponent<SpriteRenderer> ();
+		audioSource = GetComponent<AudioSource> ();
 
 		velocity = 10;
 		mass = 100;
@@ -40,15 +47,16 @@ public class Cannon : MonoBehaviour {
 	void Update () {
 		// start play shot animation
 		if (isFire () && bullet > 0) {
-			ani.SetBool ("shoting", true);
+			throwAnimator.SetBool ("shoting", true);
 			fireThrowBall = true;
 		} else if (isFire ()) {
-			ani.SetBool ("shot_fail", true);
+			throwAnimator.SetBool ("shot_fail", true);
 		}
 
 		// shot_4 is exactly shot image
 		if (fireThrowBall && spriteRenderer.sprite.name == "shot_4") {
 			ThrowBall ();
+			PlayThrowSound ();
 			fireThrowBall = false;
 		}
 			
@@ -124,6 +132,10 @@ public class Cannon : MonoBehaviour {
 		ball.transform.position = new Vector3(position.x + 1.6f, position.y + 0.4f, 0);
 		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(velocity, 0, 0);
 		ball.GetComponent<Rigidbody2D> ().mass = mass;
+	}
 
+	void PlayThrowSound() {
+		float vol = UnityEngine.Random.Range (throwSoundVolLowRange, throwSoundVolHighRange);
+		audioSource.PlayOneShot (throwSound, vol);
 	}
 }
