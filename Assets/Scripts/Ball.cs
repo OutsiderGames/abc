@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Ball : MonoBehaviour {
 	private Rigidbody2D rb;
 	private CircleCollider2D cc;
 	public bool disturb;
 	public int color;
+	public List<GameObject> connected;
 	
 	// Use this for initialization
 	void Start () {
@@ -24,14 +26,32 @@ public class Ball : MonoBehaviour {
 		    position.y < -15.0f) {
 			Destroy(this.gameObject);
 		}
+		if (connected.Count >= 1) {
+			foreach (GameObject ball in connected) {
+				ball.SetActive (false);
+				this.gameObject.SetActive (false);
+			}
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
+		if (other.gameObject.CompareTag ("Ball")) {
+			if (connected.Contains (other.gameObject)) {
+				connected.Remove (other.gameObject);
+			}
+		}
 		if (other.name == "Entrance") {
 			cc.enabled = true;
 		}
 	}
 	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.CompareTag ("Ball") &&
+			other.gameObject.GetComponent<Ball>().color == color &&
+			disturb == false &&
+			other.gameObject.GetComponent<Ball>().disturb &&
+			connected.Contains (other.gameObject) == false) {
+			connected.Add (other.gameObject);
+		}
 		if (other.name == "Exit") {
 			if (rb.velocity.x > 5.0f &&
 				disturb == false) {
