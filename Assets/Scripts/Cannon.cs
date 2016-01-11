@@ -12,6 +12,8 @@ public class Cannon : MonoBehaviour {
 	private float speed;
 	private float moveThresholdX;
 	private float scaleY;
+	private int velocity;
+	private int mass;
 
 	private Animator ani;
 
@@ -23,8 +25,9 @@ public class Cannon : MonoBehaviour {
 		speed = 0.3f;
 		moveThresholdX = Screen.width * 0.3f;
 		scaleY = Screen.height / 20.0f;
-
 		ani = GetComponent<Animator> ();
+		velocity = 10;
+		mass = 100;
 	}
 	
 	// Update is called once per frame
@@ -102,7 +105,10 @@ public class Cannon : MonoBehaviour {
 		ball.GetComponent<Ball> ().color = ballNumber;
 		ball.GetComponent<Ball> ().disturb = false;
 		Vector3 position = this.transform.position;
+
 		ball.transform.position = new Vector3(position.x + 1.5f, position.y + 0.2f, position.z);
-		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(10, 0, 0);
+		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(velocity, 0, 0);
+		ball.GetComponent<Rigidbody2D> ().mass = mass;
+
 	}
 }
