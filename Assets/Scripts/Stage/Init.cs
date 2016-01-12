@@ -3,6 +3,9 @@ using System;
 using System.Collections;
 
 public class Init : MonoBehaviour {
+	[SerializeField]
+	private GameObject[] target;
+
 	private AbcConfig config;
 	private int bullet;
 	private int ballBucketSize;
@@ -28,6 +31,9 @@ public class Init : MonoBehaviour {
 			ball.GetComponent<Rigidbody2D>().velocity = config.velocity;
 			ball.GetComponents<CircleCollider2D>()[0].enabled = true;
 		}
+
+		int targetIdx = UnityEngine.Random.Range (0, target.Length);
+		Instantiate(target [targetIdx]);
 	}
 }
 

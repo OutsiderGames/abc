@@ -4,8 +4,7 @@ using System;
 using System.Collections;
 
 public class Target : MonoBehaviour {
-	public Text scoreText;
-
+	
 	private int maxHp;
 	private int hp;
 	private bool alive;
@@ -28,7 +27,6 @@ public class Target : MonoBehaviour {
 		hash ["speed"] = config.speed;
 		hash ["path"] = config.path;
 		iTween.MoveTo (this.gameObject, hash);
-		scoreText.text = "Boss HP : " + hp * 100 / maxHp  + "%";
 
 		animator = GetComponent<Animator> ();
 	}
@@ -43,10 +41,7 @@ public class Target : MonoBehaviour {
 			hp -= 10;
 			if (hp == 0) {
 				alive = false;
-				scoreText.text = "Clear";
 				Application.LoadLevel ("result"); 
-			} else {
-				scoreText.text = "Boss HP : " + hp * 100 / maxHp  + "%";
 			}
 
 			animator.SetBool ("hit", true);
