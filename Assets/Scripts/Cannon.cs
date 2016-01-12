@@ -27,7 +27,7 @@ public class Cannon : MonoBehaviour {
 	private SpriteRenderer spriteRenderer;
 
 	private AudioSource audioSource;
-	private float throwSoundVolLowRange = .5f;
+	private float throwSoundVolLowRange = .6f;
 	private float throwSoundVolHighRange = 1f;
 
 	private bool fireThrowBall = false;
@@ -88,8 +88,6 @@ public class Cannon : MonoBehaviour {
 	private GUIStyle guiStyle = new GUIStyle ();
 	void OnGUI() {
 		Vector2 pos = barPosition;
-
-		Debug.Log ("OnGUI : " + pos);
 
 		//draw the background:
 		GUI.BeginGroup(new Rect(pos.x, pos.y, barSize.x, barSize.y));
