@@ -50,27 +50,30 @@ public class Target : MonoBehaviour {
 		Vector2 pos = screenPosition;
 		Vector2 size = new Vector2 (100, 15);
 
+		GUIStyle guiStyle = new GUIStyle ();
+
 		//draw the background:
 		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex, guiStyle);
 
 		//draw the filled-in part:
 		GUI.BeginGroup(new Rect(0,0, size.x * energy, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex,guiStyle);
 		GUI.EndGroup();
+
 		GUI.EndGroup();
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (alive) {
 			hp -= 10;
+			energy = ((float)hp / (float)maxHp);
 			if (hp == 0) {
 				alive = false;
 				SceneManager.LoadScene ("result");
 			}
 
 			animator.SetBool ("hit", true);
-			energy = (float)hp / (float)maxHp;
 		}
 		other.gameObject.SetActive (false);
 	}
