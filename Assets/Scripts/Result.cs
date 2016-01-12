@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Result : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class Result : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonUp (0)) {
-			Application.LoadLevel ("menu"); 
+			SceneManager.LoadScene ("menu");
 		}
 	}
 }

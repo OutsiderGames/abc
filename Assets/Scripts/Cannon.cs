@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 
@@ -26,6 +27,9 @@ public class Cannon : MonoBehaviour {
 
 	private bool fireThrowBall = false;
 
+	private bool endFlag;
+	private int endTimer;
+
 	// Use this for initialization
 	void Start () {
 		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (StageMenu.getStage ()));
@@ -42,6 +46,8 @@ public class Cannon : MonoBehaviour {
 		CannonConfig cannon = (CannonConfig)Activator.CreateInstance(Type.GetType (CannonMenu.getCannon ()));
 		velocity = cannon.velocity;
 		mass = cannon.mass;
+		endFlag = false;
+		endTimer = 0;
 	}
 	
 	// Update is called once per frame
@@ -60,6 +66,7 @@ public class Cannon : MonoBehaviour {
 			PlayThrowSound ();
 			fireThrowBall = false;
 		}
+		checkFail ();
 			
 		Vector2? movePosition = getMovePosition ();
 		if (movePosition.HasValue) {
@@ -111,8 +118,6 @@ public class Cannon : MonoBehaviour {
 		float start = this.transform.position.y;
 		float end = position.y / scaleY - 10;
 		float y = this.transform.position.y;
-		Debug.Log (camera.ScreenToWorldPoint(position));
-		Debug.Log (this.transform.position);
 		if (start > end) {
 			y = start - speed > end ? start - speed : end;
 		}
@@ -138,5 +143,18 @@ public class Cannon : MonoBehaviour {
 	void PlayThrowSound() {
 		float vol = UnityEngine.Random.Range (throwSoundVolLowRange, throwSoundVolHighRange);
 		audioSource.PlayOneShot (throwSound, vol);
+	}
+
+	void checkFail() {
+		if (bullet == 0 && endFlag == false) {
+			endTimer = 300;
+			endFlag = true;
+		}
+		if (endFlag) {
+			endTimer--;
+		}
+		if (endTimer < 0) {
+			SceneManager.LoadScene ("fail");
+		}
 	}
 }

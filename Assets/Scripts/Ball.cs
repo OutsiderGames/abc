@@ -21,10 +21,10 @@ public class Ball : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 position = this.transform.position;
-		if (position.x > 15.0f ||
-		    position.x < -15.0f ||
-		    position.y > 15.0f ||
-		    position.y < -15.0f) {
+		if (position.x > 25.0f ||
+		    position.x < -25.0f ||
+		    position.y > 25.0f ||
+		    position.y < -25.0f) {
 			Destroy(this.gameObject);
 		}
 		if (connected.Count >= 1) {

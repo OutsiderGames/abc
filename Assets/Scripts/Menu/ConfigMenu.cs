@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class ConfigMenu : MonoBehaviour {
 	void OnMouseDown() {
-		Application.LoadLevel ("config"); 
+		SceneManager.LoadScene ("config");
 	}
 }

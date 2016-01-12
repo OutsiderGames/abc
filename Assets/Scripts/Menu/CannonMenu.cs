@@ -24,5 +24,9 @@ public class CannonMenu : MonoBehaviour {
 		}
 		return cannon;
 	}
+
+	public void useCustom() {
+		cannon = "Custom";
+	}
 }
 

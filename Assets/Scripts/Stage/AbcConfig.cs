@@ -7,6 +7,8 @@ public class AbcConfig {
 	public int ballBucketSize;
 	public BallConfig[] configs;
 	public int hp;
+	public iTween.LoopType loopType;
+	public iTween.EaseType easeType;
 	public float speed;
 	public Vector3[] path;
 }

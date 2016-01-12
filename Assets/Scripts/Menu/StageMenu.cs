@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -9,8 +10,7 @@ public class StageMenu : MonoBehaviour {
 
 	void OnMouseDown() {
 		stage = value;
-		Debug.Log (stage);
-		Application.LoadLevel ("game"); 
+		SceneManager.LoadScene ("game");
 	}
 
 	public static string getStage() {

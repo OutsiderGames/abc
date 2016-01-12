@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 	void OnMouseDown() {
-		Application.LoadLevel ("menu"); 
+		SceneManager.LoadScene ("menu");
 	}
 }

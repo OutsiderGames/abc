@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -29,8 +30,8 @@ public class Target : MonoBehaviour {
 		maxHp = config.hp;
 		alive = true;
 		Hashtable hash = new Hashtable ();
-		hash ["looptype"] = iTween.LoopType.loop;
-		hash ["easetype"] = iTween.EaseType.linear;
+		hash ["looptype"] = config.loopType;
+		hash ["easetype"] = config.easeType;
 		hash ["speed"] = config.speed;
 		hash ["path"] = config.path;
 		iTween.MoveTo (this.gameObject, hash);
@@ -65,7 +66,7 @@ public class Target : MonoBehaviour {
 			hp -= 10;
 			if (hp == 0) {
 				alive = false;
-				Application.LoadLevel ("result"); 
+				SceneManager.LoadScene ("result");
 			}
 
 			animator.SetBool ("hit", true);
