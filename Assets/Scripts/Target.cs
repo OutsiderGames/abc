@@ -4,6 +4,10 @@ using System;
 using System.Collections;
 
 public class Target : MonoBehaviour {
+	[SerializeField]
+	private Texture2D emptyTex;
+	[SerializeField]
+	private Texture2D fullTex;
 	
 	private int maxHp;
 	private int hp;
@@ -14,6 +18,9 @@ public class Target : MonoBehaviour {
 	private float maxY;
 
 	private Animator animator;
+
+	private Vector2 screenPosition;
+	private float energy = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +40,24 @@ public class Target : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Vector2 barPos = new Vector2 (transform.position.x - 3f, transform.position.y + 2f);
+		screenPosition = Camera.main.WorldToScreenPoint(barPos);
+		screenPosition.y = Screen.height - screenPosition.y;
+	}
+
+	void OnGUI() {
+		Vector2 pos = screenPosition;
+		Vector2 size = new Vector2 (100, 15);
+
+		//draw the background:
+		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex);
+
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, size.x * energy, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex);
+		GUI.EndGroup();
+		GUI.EndGroup();
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -45,6 +69,7 @@ public class Target : MonoBehaviour {
 			}
 
 			animator.SetBool ("hit", true);
+			energy = (float)hp / (float)maxHp;
 		}
 		other.gameObject.SetActive (false);
 	}
