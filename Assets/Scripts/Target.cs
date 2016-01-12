@@ -14,6 +14,8 @@ public class Target : MonoBehaviour {
 	private float minY;
 	private float maxY;
 
+	private Animator animator;
+
 	// Use this for initialization
 	void Start () {
 		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (StageMenu.getStage ()));
@@ -27,6 +29,8 @@ public class Target : MonoBehaviour {
 		hash ["path"] = config.path;
 		iTween.MoveTo (this.gameObject, hash);
 		scoreText.text = "Boss HP : " + hp * 100 / maxHp  + "%";
+
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -44,6 +48,8 @@ public class Target : MonoBehaviour {
 			} else {
 				scoreText.text = "Boss HP : " + hp * 100 / maxHp  + "%";
 			}
+
+			animator.SetBool ("hit", true);
 		}
 		other.gameObject.SetActive (false);
 	}
