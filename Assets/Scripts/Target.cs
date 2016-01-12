@@ -42,25 +42,24 @@ public class Target : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector2 barPos = new Vector2 (transform.position.x - 3f, transform.position.y + 2f);
+		Vector2 barPos = new Vector2 (transform.position.x - 2.5f, transform.position.y + 2f);
 		screenPosition = Camera.main.WorldToScreenPoint(barPos);
 		screenPosition.y = Screen.height - screenPosition.y;
 	}
 
+	private Vector2 barSize = new Vector2 (60, 15);
+	private GUIStyle guiStyle = new GUIStyle ();
 	void OnGUI() {
 		Vector2 pos = screenPosition;
-		Vector2 size = new Vector2 (100, 15);
-
-		GUIStyle guiStyle = new GUIStyle ();
 
 		//draw the background:
-		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
+		GUI.BeginGroup(new Rect(pos.x, pos.y, barSize.x, barSize.y));
 
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex, guiStyle);
+		GUI.Box(new Rect(0,0, barSize.x, barSize.y), emptyTex, guiStyle);
 
 		//draw the filled-in part:
-		GUI.BeginGroup(new Rect(0,0, size.x * energy, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex,guiStyle);
+		GUI.BeginGroup(new Rect(0,0, barSize.x * energy, barSize.y));
+		GUI.Box(new Rect(0,0, barSize.x, barSize.y), fullTex,guiStyle);
 		GUI.EndGroup();
 
 		GUI.EndGroup();

@@ -84,29 +84,28 @@ public class Cannon : MonoBehaviour {
 		UpdateGUIPosition ();
 	}
 
+	private Vector2 barSize = new Vector2 (60, 15);
+	private GUIStyle guiStyle = new GUIStyle ();
 	void OnGUI() {
 		Vector2 pos = barPosition;
-		Vector2 size = new Vector2 (100, 15);
 
 		Debug.Log ("OnGUI : " + pos);
 
-		GUIStyle guiStyle = new GUIStyle ();
-
 		//draw the background:
-		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
+		GUI.BeginGroup(new Rect(pos.x, pos.y, barSize.x, barSize.y));
 
-		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex, guiStyle);
+		GUI.Box(new Rect(0,0, barSize.x, barSize.y), emptyTex, guiStyle);
 
 		//draw the filled-in part:
-		GUI.BeginGroup(new Rect(0,0, size.x * energy, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), fullTex,guiStyle);
+		GUI.BeginGroup(new Rect(0,0, barSize.x * energy, barSize.y));
+		GUI.Box(new Rect(0,0, barSize.x, barSize.y), fullTex,guiStyle);
 		GUI.EndGroup();
 
 		GUI.EndGroup();
 	}
 
 	void UpdateGUIPosition() {
-		Vector2 tmpPos = new Vector2 (transform.position.x - 2.5f, transform.position.y - 1.5f);
+		Vector2 tmpPos = new Vector2 (transform.position.x - 2.25f, transform.position.y - 1.5f);
 		barPosition = Camera.main.WorldToScreenPoint(tmpPos);
 		barPosition.y = Screen.height - barPosition.y;
 	}
