@@ -8,9 +8,14 @@ public class Cannon : MonoBehaviour {
 	private Camera camera;
 	[SerializeField]
 	private AudioClip throwSound;
+	[SerializeField]
+	private Texture2D emptyTex;
+	[SerializeField]
+	private Texture2D fullTex;
 
 	private AbcConfig config;
 	private int bullet;
+	private int maxBullet;
 	private int ballBucketSize;
 	private float speed;
 	private float moveThresholdX;
@@ -30,10 +35,13 @@ public class Cannon : MonoBehaviour {
 	private bool endFlag;
 	private int endTimer;
 
+	private Vector2 barPosition;
+	private float energy = 1f;
+
 	// Use this for initialization
 	void Start () {
 		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (StageMenu.getStage ()));
-		bullet = config.bullet;
+		maxBullet = bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
 		speed = 0.3f;
 		moveThresholdX = Screen.width * 0.3f;
@@ -72,6 +80,35 @@ public class Cannon : MonoBehaviour {
 		if (movePosition.HasValue) {
 			moveTo (movePosition.Value);
 		}
+
+		UpdateGUIPosition ();
+	}
+
+	void OnGUI() {
+		Vector2 pos = barPosition;
+		Vector2 size = new Vector2 (100, 15);
+
+		Debug.Log ("OnGUI : " + pos);
+
+		GUIStyle guiStyle = new GUIStyle ();
+
+		//draw the background:
+		GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
+
+		GUI.Box(new Rect(0,0, size.x, size.y), emptyTex, guiStyle);
+
+		//draw the filled-in part:
+		GUI.BeginGroup(new Rect(0,0, size.x * energy, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), fullTex,guiStyle);
+		GUI.EndGroup();
+
+		GUI.EndGroup();
+	}
+
+	void UpdateGUIPosition() {
+		Vector2 tmpPos = new Vector2 (transform.position.x - 2.5f, transform.position.y - 1.5f);
+		barPosition = Camera.main.WorldToScreenPoint(tmpPos);
+		barPosition.y = Screen.height - barPosition.y;
 	}
 
 	Vector2? getMovePosition() {
@@ -138,6 +175,8 @@ public class Cannon : MonoBehaviour {
 		ball.transform.position = new Vector3(position.x + 1.6f, position.y + 0.4f, 0);
 		ball.GetComponent<Rigidbody2D>().velocity = new Vector3(velocity, 0, 0);
 		ball.GetComponent<Rigidbody2D> ().mass = mass;
+
+		energy = (float) bullet / (float) maxBullet;
 	}
 
 	void PlayThrowSound() {
