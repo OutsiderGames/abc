@@ -54,8 +54,11 @@ public class Ball : MonoBehaviour {
 			connected.Add (other.gameObject);
 		}
 		if (other.name == "Exit") {
-			if (Math.Abs(rb.velocity.x) > 5.0f &&
-				disturb == false) {
+			if (Math.Abs (rb.velocity.x) > 5.0f &&
+			    disturb == false) {
+				cc.enabled = false;
+			} else if (Math.Abs (rb.velocity.x) > 10.0f &&
+			           disturb == true) {
 				cc.enabled = false;
 			} else {
 				disturb = true;

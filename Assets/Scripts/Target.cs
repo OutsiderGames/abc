@@ -34,6 +34,7 @@ public class Target : MonoBehaviour {
 		hash ["easetype"] = config.easeType;
 		hash ["speed"] = config.speed;
 		hash ["path"] = config.path;
+		this.gameObject.transform.position = config.path [0];
 		iTween.MoveTo (this.gameObject, hash);
 
 		animator = GetComponent<Animator> ();
