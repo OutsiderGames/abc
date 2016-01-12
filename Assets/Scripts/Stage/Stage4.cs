@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Stage4 : AbcConfig {
 	public Stage4() {
-		bullet = 20;
+		bullet = 15;
 		ballBucketSize = 1;
-		configs = new BallConfig[]{new BallConfig(0, 0, 0, -8, 1), new BallConfig(5, 4, 0, -8, 1), new BallConfig(10, 8, 0, -8, 1)};
+		configs = new BallConfig[]{new BallConfig(-5, -4, 0, -15, 1), new BallConfig(0, 0, 0, -15, 1), new BallConfig(5, 4, 0, -15, 1), new BallConfig(10, 8, 0, -15, 1)};
 		hp = 50;
 		loopType = iTween.LoopType.pingPong;
 		easeType = iTween.EaseType.linear;

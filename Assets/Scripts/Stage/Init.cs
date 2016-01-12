@@ -29,6 +29,7 @@ public class Init : MonoBehaviour {
 			ball.GetComponent<Ball> ().color = config.color;
 			ball.GetComponent<Ball> ().disturb = true;
 			ball.GetComponent<Rigidbody2D>().velocity = config.velocity;
+			ball.GetComponent<Rigidbody2D>().mass = config.mass;
 			ball.GetComponents<CircleCollider2D>()[0].enabled = true;
 		}
 

@@ -15,7 +15,7 @@ public class StageMenu : MonoBehaviour {
 
 	public static string getStage() {
 		if (stage == null) {
-			stage = "Stage5";
+			stage = "Stage10";
 		}
 		return stage;
 	}

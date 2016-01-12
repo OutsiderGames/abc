@@ -14,11 +14,20 @@ public class BallConfig {
 	public Vector3 position;
 	public Vector3 velocity;
 	public int color;
+	public int mass;
 
 	public BallConfig(int xPos, int yPos, int xVel, int yVel, int color) {
 		this.position = new Vector3(xPos, yPos, 0);
 		this.velocity = new Vector3(xVel, yVel, 0);
 		this.color = color;
+		this.mass = 100;
+	}
+
+	public BallConfig(int xPos, int yPos, int xVel, int yVel, int color, int mass) {
+		this.position = new Vector3(xPos, yPos, 0);
+		this.velocity = new Vector3(xVel, yVel, 0);
+		this.color = color;
+		this.mass = mass;
 	}
 }
 
