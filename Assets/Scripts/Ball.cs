@@ -29,6 +29,7 @@ public class Ball : MonoBehaviour {
 		}
 		if (connected.Count >= 1) {
 			foreach (GameObject ball in connected) {
+				// Destory two balls
 				ball.SetActive (false);
 				this.gameObject.SetActive (false);
 			}
@@ -57,16 +58,14 @@ public class Ball : MonoBehaviour {
 			if (Math.Abs (rb.velocity.x) > 5.0f &&
 			    disturb == false) {
 				cc.enabled = false;
-			} else if (Math.Abs (rb.velocity.x) > 10.0f &&
-			           disturb == true) {
-				cc.enabled = false;
 			} else {
 				disturb = true;
 			}
 		}
 		if (other.CompareTag ("Wall") &&
-			Math.Abs(rb.velocity.x) > 20.0f &&
+			Math.Abs(rb.velocity.x) > 50.0f &&
 			disturb == true) {
+			// Destory ball with wall
 			gameObject.SetActive (false);
 		}
 	}
