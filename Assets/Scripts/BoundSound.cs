@@ -31,6 +31,8 @@ public class BoundSound : MonoBehaviour {
 		AudioClip playSound = sounds [idx];
 
 		float vol = UnityEngine.Random.Range (soundVolLowRange, soundVolHighRange);
-		audioSource.PlayOneShot (playSound, vol);
+		if (audioSource != null && playSound != null) {
+			audioSource.PlayOneShot (playSound, vol);
+		}
 	}
 }
