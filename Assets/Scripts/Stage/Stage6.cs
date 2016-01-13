@@ -5,7 +5,7 @@ public class Stage6 : AbcConfig {
 	public Stage6() {
 		bullet = 20;
 		ballBucketSize = 4;
-		configs = new BallConfig[]{new BallConfig(-4, -9, -15, -15, 1, 500), new BallConfig(14, -9, 15, -15, 2, 500), new BallConfig(14, 9, 15, 15, 3, 500), new BallConfig(-4, 9, -15, 15, 4, 500)};
+		configs = new BallConfig[]{new BallConfig(-7, -9, -15, -15, 1, 500), new BallConfig(11, -9, 15, -15, 2, 500), new BallConfig(11, 9, 15, 15, 3, 500), new BallConfig(-7, 9, -15, 15, 4, 500)};
 		hp = 50;
 		loopType = iTween.LoopType.pingPong;
 		easeType = iTween.EaseType.linear;
