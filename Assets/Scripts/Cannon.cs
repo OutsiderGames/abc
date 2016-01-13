@@ -8,10 +8,6 @@ public class Cannon : MonoBehaviour {
 	private Camera camera;
 	[SerializeField]
 	private AudioClip throwSound;
-	[SerializeField]
-	private Texture2D emptyTex;
-	[SerializeField]
-	private Texture2D fullTex;
 
 	private AbcConfig config;
 	private int bullet;
@@ -35,12 +31,12 @@ public class Cannon : MonoBehaviour {
 	private bool endFlag;
 	private int endTimer;
 
-	private Vector2 barPosition;
 	private float energy = 1f;
+	private GameObject fillBarGameObject;
 
 	// Use this for initialization
 	void Start () {
-		AbcConfig config = (AbcConfig)Activator.CreateInstance(Type.GetType (StageMenu.getStage ()));
+		AbcConfig config = (AbcConfig)Activator.CreateInstance (Type.GetType (StageMenu.getStage ()));
 		maxBullet = bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
 		speed = 0.3f;
@@ -51,12 +47,19 @@ public class Cannon : MonoBehaviour {
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		audioSource = GetComponent<AudioSource> ();
 
-		CannonConfig cannon = (CannonConfig)Activator.CreateInstance(Type.GetType (CannonMenu.getCannon ()));
+		CannonConfig cannon = (CannonConfig)Activator.CreateInstance (Type.GetType (CannonMenu.getCannon ()));
 		velocity = cannon.velocity;
 		mass = cannon.mass;
 		endFlag = false;
 		endTimer = 0;
+
+		// create energy bar
+		GameObject energyBarGameObject = Instantiate (Resources.Load ("EnergyBar", typeof(GameObject))) as GameObject;
+		energyBarGameObject.transform.position = new Vector3 (transform.position.x - 2f , transform.position.y - 1.5f, 0);
+		energyBarGameObject.name = "CannonEnergyBar";
+		fillBarGameObject = GameObject.Find ("CannonEnergyBar/EnergyFillBar");
 	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -72,6 +75,8 @@ public class Cannon : MonoBehaviour {
 		if (fireThrowBall && spriteRenderer.sprite.name == "shot_4") {
 			ThrowBall ();
 			PlayThrowSound ();
+			SetEnergyBar ();
+
 			fireThrowBall = false;
 		}
 		checkFail ();
@@ -80,32 +85,6 @@ public class Cannon : MonoBehaviour {
 		if (movePosition.HasValue) {
 			moveTo (movePosition.Value);
 		}
-
-		UpdateGUIPosition ();
-	}
-
-	private Vector2 barSize = new Vector2 (60, 15);
-	private GUIStyle guiStyle = new GUIStyle ();
-	void OnGUI() {
-		Vector2 pos = barPosition;
-
-		//draw the background:
-		GUI.BeginGroup(new Rect(pos.x, pos.y, barSize.x, barSize.y));
-
-		GUI.Box(new Rect(0,0, barSize.x, barSize.y), emptyTex, guiStyle);
-
-		//draw the filled-in part:
-		GUI.BeginGroup(new Rect(0,0, barSize.x * energy, barSize.y));
-		GUI.Box(new Rect(0,0, barSize.x, barSize.y), fullTex,guiStyle);
-		GUI.EndGroup();
-
-		GUI.EndGroup();
-	}
-
-	void UpdateGUIPosition() {
-		Vector2 tmpPos = new Vector2 (transform.position.x - 2.25f, transform.position.y - 1.5f);
-		barPosition = Camera.main.WorldToScreenPoint(tmpPos);
-		barPosition.y = Screen.height - barPosition.y;
 	}
 
 	Vector2? getMovePosition() {
@@ -192,5 +171,9 @@ public class Cannon : MonoBehaviour {
 		if (endTimer < 0) {
 			SceneManager.LoadScene ("fail");
 		}
+	}
+
+	void SetEnergyBar() {
+		fillBarGameObject.transform.localScale = new Vector3(energy, 1, 1);
 	}
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraInit : MonoBehaviour {
 
 	const float DefaultWidth = 640f;
-	const float DefaultCameraSize = 12f;
+	const float DefaultCameraSize = 17f;
 
 	// Use this for initialization
 	void Start () {
