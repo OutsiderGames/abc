@@ -48,6 +48,9 @@ public class Ball : MonoBehaviour {
 			}
 		}
 		if (other.name == "Entrance") {
+			if (cc == null) {
+				cc = GetComponents<CircleCollider2D>()[0];
+			}
 			cc.enabled = true;
 		}
 	}
