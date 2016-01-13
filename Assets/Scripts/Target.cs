@@ -5,11 +5,6 @@ using System;
 using System.Collections;
 
 public class Target : MonoBehaviour {
-	[SerializeField]
-	private Texture2D emptyTex;
-	[SerializeField]
-	private Texture2D fullTex;
-	
 	private int maxHp;
 	private int hp;
 	private bool alive;
@@ -20,8 +15,12 @@ public class Target : MonoBehaviour {
 
 	private Animator animator;
 
-	private Vector2 screenPosition;
 	private float energy = 1f;
+	private GameObject fillBarGameObject;
+	private GameObject energyBarGameObject;
+
+	private float barXPositionAdject = - 2f;
+	private float barYPositionAdject = 1.8f;
 
 	// Use this for initialization
 	void Start () {
@@ -38,37 +37,25 @@ public class Target : MonoBehaviour {
 		iTween.MoveTo (this.gameObject, hash);
 
 		animator = GetComponent<Animator> ();
+
+		// create energy bar
+
+		energyBarGameObject = Instantiate (Resources.Load ("EnergyBar", typeof(GameObject))) as GameObject;
+		energyBarGameObject.transform.parent = gameObject.transform;
+		energyBarGameObject.transform.position = new Vector3 (transform.position.x + barXPositionAdject , transform.position.y + barYPositionAdject, 0);
+		energyBarGameObject.name = "TargetEnergyBar";
+		fillBarGameObject = GameObject.Find ("TargetEnergyBar/EnergyFillBar");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Vector2 barPos = new Vector2 (transform.position.x - 2.5f, transform.position.y + 2f);
-		screenPosition = Camera.main.WorldToScreenPoint(barPos);
-		screenPosition.y = Screen.height - screenPosition.y;
-	}
-
-	private Vector2 barSize = new Vector2 (60, 15);
-	private GUIStyle guiStyle = new GUIStyle ();
-	void OnGUI() {
-		Vector2 pos = screenPosition;
-
-		//draw the background:
-		GUI.BeginGroup(new Rect(pos.x, pos.y, barSize.x, barSize.y));
-
-		GUI.Box(new Rect(0,0, barSize.x, barSize.y), emptyTex, guiStyle);
-
-		//draw the filled-in part:
-		GUI.BeginGroup(new Rect(0,0, barSize.x * energy, barSize.y));
-		GUI.Box(new Rect(0,0, barSize.x, barSize.y), fullTex,guiStyle);
-		GUI.EndGroup();
-
-		GUI.EndGroup();
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (alive) {
 			hp -= 10;
 			energy = ((float)hp / (float)maxHp);
+			fillBarGameObject.transform.localScale = new Vector3 (energy, 1, 1);
 			if (hp == 0) {
 				alive = false;
 				SceneManager.LoadScene ("result");
