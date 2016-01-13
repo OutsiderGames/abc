@@ -8,7 +8,7 @@ public class StageMenu : MonoBehaviour {
 
 	public string value;
 
-	void OnMouseDown() {
+	void OnMouseUp() {
 		stage = value;
 		SceneManager.LoadScene ("game");
 	}
