@@ -55,6 +55,7 @@ public class Cannon : MonoBehaviour {
 
 		// create energy bar
 		GameObject energyBarGameObject = Instantiate (Resources.Load ("EnergyBar", typeof(GameObject))) as GameObject;
+		energyBarGameObject.transform.parent = gameObject.transform;
 		energyBarGameObject.transform.position = new Vector3 (transform.position.x - 2f , transform.position.y - 1.5f, 0);
 		energyBarGameObject.name = "CannonEnergyBar";
 		fillBarGameObject = GameObject.Find ("CannonEnergyBar/EnergyFillBar");
