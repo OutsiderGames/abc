@@ -26,7 +26,7 @@ public class Cannon : MonoBehaviour {
 	private float throwSoundVolLowRange = .6f;
 	private float throwSoundVolHighRange = 1f;
 
-	private bool fireThrowBall = false;
+	private volatile bool fireThrowBall = false;
 
 	private bool endFlag;
 	private int endTimer;
@@ -60,15 +60,14 @@ public class Cannon : MonoBehaviour {
 		energyBarGameObject.name = "CannonEnergyBar";
 		fillBarGameObject = GameObject.Find ("CannonEnergyBar/EnergyFillBar");
 	}
-	
-	
+
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		// start play shot animation
-		if (isFire () && bullet > 0) {
+		if (isFire () && bullet > 0 ) {
 			throwAnimator.SetBool ("shoting", true);
 			fireThrowBall = true;
-		} else if (isFire ()) {
+		} else if (isFire () ) {
 			throwAnimator.SetBool ("shot_fail", true);
 		}
 
@@ -77,9 +76,9 @@ public class Cannon : MonoBehaviour {
 			ThrowBall ();
 			PlayThrowSound ();
 			SetEnergyBar ();
-
 			fireThrowBall = false;
 		}
+
 		checkFail ();
 			
 		Vector2? movePosition = getMovePosition ();
@@ -128,7 +127,6 @@ public class Cannon : MonoBehaviour {
 	}
 
 	void moveTo(Vector2 position) {
-		
 		float start = this.transform.position.y;
 		float end = position.y / scaleY - 10;
 		float y = this.transform.position.y;
