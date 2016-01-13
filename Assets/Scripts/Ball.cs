@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour {
 	public bool disturb;
 	public int color;
 	public List<GameObject> connected;
+	public GameObject particle;
+	public GameObject particleInstance = null;
 	
 	// Use this for initialization
 	void Start () {
@@ -16,6 +18,7 @@ public class Ball : MonoBehaviour {
 		rb.drag = 0.0f;
 		rb.angularVelocity = 0.0f;
 		cc = GetComponents<CircleCollider2D>()[0];
+		particle = Resources.Load ("ExplosionMobile", typeof(GameObject)) as GameObject;
 	}
 	
 	// Update is called once per frame
@@ -32,6 +35,8 @@ public class Ball : MonoBehaviour {
 				// Destory two balls
 				ball.SetActive (false);
 				this.gameObject.SetActive (false);
+				particle.transform.position = transform.position;
+				particleInstance = Instantiate (particle) as GameObject;
 			}
 		}
 	}
