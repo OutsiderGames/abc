@@ -6,8 +6,8 @@ public class Stage8 : AbcConfig {
 		bullet = 20;
 		ballBucketSize = 5;
 		configs = new BallConfig[]{
-			new BallConfig(1, 1, 5, -10, 5), new BallConfig(3, 1, 5, -10, 5), new BallConfig(5, 1, 5, -10, 5), new BallConfig(7, 1, 5, -10, 5), new BallConfig(9, 1, 5, -10, 5), new BallConfig(11, 1, 5, -10, 5), 
-			new BallConfig(1, -1, 5, 10, 5), new BallConfig(3, -1, 5, 10, 5), new BallConfig(5, -1, 5, 10, 5), new BallConfig(7, -1, 5, 10, 5), new BallConfig(9, -1, 5, 10, 5), new BallConfig(11, -1, 5, 10, 5)};
+			new BallConfig(-2, 1, 5, -10, 5), new BallConfig(0, 1, 5, -10, 5), new BallConfig(2, 1, 5, -10, 5), new BallConfig(4, 1, 5, -10, 5), new BallConfig(6, 1, 5, -10, 5), new BallConfig(8, 1, 5, -10, 5), 
+			new BallConfig(-2, -1, 5, 10, 5), new BallConfig(0, -1, 5, 10, 5), new BallConfig(2, -1, 5, 10, 5), new BallConfig(4, -1, 5, 10, 5), new BallConfig(6, -1, 5, 10, 5), new BallConfig(8, -1, 5, 10, 5)};
 		hp = 50;
 		loopType = iTween.LoopType.pingPong;
 		easeType = iTween.EaseType.linear;

@@ -6,8 +6,8 @@ public class Stage10 : AbcConfig {
 		bullet = 40;
 		ballBucketSize = 3;
 		configs = new BallConfig[]{
-			new BallConfig(-4, 9, 3, -14, 1), new BallConfig(-2, 9, 3, -14, 2), new BallConfig(0, 9, 3, -14, 3), new BallConfig(2, 9, 3, -14, 4), 
-			new BallConfig(4, 9, 3, -14, 5), new BallConfig(6, 9, 3, -14, 6), new BallConfig(8, 9, 3, -14, 7), new BallConfig(10, 9, 3, -14, 8)};
+			new BallConfig(-7, 9, 3, -14, 1), new BallConfig(-5, 9, 3, -14, 2), new BallConfig(-3, 9, 3, -14, 3), new BallConfig(-1, 9, 3, -14, 4), 
+			new BallConfig(1, 9, 3, -14, 5), new BallConfig(3, 9, 3, -14, 6), new BallConfig(5, 9, 3, -14, 7), new BallConfig(7, 9, 3, -14, 8)};
 		hp = 50;
 		loopType = iTween.LoopType.loop;
 		easeType = iTween.EaseType.linear;
