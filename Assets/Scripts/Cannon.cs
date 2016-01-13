@@ -39,7 +39,7 @@ public class Cannon : MonoBehaviour {
 		AbcConfig config = (AbcConfig)Activator.CreateInstance (Type.GetType (StageMenu.getStage ()));
 		maxBullet = bullet = config.bullet;
 		ballBucketSize = config.ballBucketSize;
-		speed = 0.3f;
+		speed = 0.7f;
 		moveThresholdX = Screen.width * 0.3f;
 		scaleY = Screen.height / 20.0f;
 
@@ -161,7 +161,7 @@ public class Cannon : MonoBehaviour {
 
 	void checkFail() {
 		if (bullet == 0 && endFlag == false) {
-			endTimer = 300;
+			endTimer = 120;
 			endFlag = true;
 		}
 		if (endFlag) {
