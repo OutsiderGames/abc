@@ -62,6 +62,7 @@ public class Cannon : MonoBehaviour {
 	}
 
 	// Update is called once per frame
+	private String lastSpriteName;
 	void FixedUpdate () {
 		// start play shot animation
 		if (isFire () && bullet > 0 ) {
@@ -72,12 +73,13 @@ public class Cannon : MonoBehaviour {
 		}
 
 		// shot_4 is exactly shot image
-		if (fireThrowBall && spriteRenderer.sprite.name == "shot_4") {
+		if (fireThrowBall && lastSpriteName == "shot_3" && spriteRenderer.sprite.name == "shot_4") {
 			ThrowBall ();
 			PlayThrowSound ();
 			SetEnergyBar ();
 			fireThrowBall = false;
 		}
+		lastSpriteName = spriteRenderer.sprite.name;
 
 		checkFail ();
 			
