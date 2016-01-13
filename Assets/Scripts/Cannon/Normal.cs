@@ -2,7 +2,7 @@
 
 public class Normal : CannonConfig {
 	public Normal() {
-		velocity = 10;
+		velocity = 30;
 		mass = 100;
 	}
 }
